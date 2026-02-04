@@ -1,0 +1,44 @@
+The comprehensive all-aspects accuracy audit comparing Ritas ground truth labels with Gemini Flash Lites predictions.
+
+Two labeled datasets are analzyed, RRE_Blind_Test_Set_Rita and RRE_Blind_Test_Set_Geimini_2. 
+
+Each review may contain more than one Aspect. 
+To calculate the accuracy of Human against AI model, we use F1 Score.  
+Firstly,  Recall (What % of human aspect did Geimini Flash Lite catch) is calcuated? 
+Secondly, Precision: What % of Gemini aspects are correct (match Rita)?
+Then, F1 score is calculated by the formuula.
+
+The results show that: 
+F1- Score is 62.35%, lower than the acceptable benchmark. 
+
+Out of 164 aspects Rita labeled:
+✅ 101 correctly identified (True Positives)
+❌ 63 completely missed (False Negatives)
+⚠️ 59 hallucinated (False Positives - aspects Gemini made up)
+
+Major findings: 
+1. Missing Critical Aspects (63 misses)
+Instructions/UX - Gemini often misses use case discussions
+Value/Price - Misses return/regret signals
+Color/Aesthetics - Confuses appearance with quality
+
+2. Hallucinating Aspects (59 false alarms)
+Adds Sizing/Fit when only Comfort is mentioned
+Adds Material/Quality when discussing Shipping
+Over-labels common aspects, under-labels rare ones
+
+3. Aspect Confusion
+Confuses Color/Aesthetics with Material/Quality (10 times)
+Confuses Value/Price with Material/Quality
+Confuses Instructions/UX with Sizing/Fit
+
+Suggestion: 
+Option A: Improve Prompts (Try First - Cheapest)
+
+Add explicit aspect examples
+Clarify confusing categories
+Re-test on 20 reviews → if better, re-run audit
+
+Option B: Upgrade Model
+Try Gemini Flash Standard (not Lite)
+Cost: 2-3x higher, but may hit 80%
